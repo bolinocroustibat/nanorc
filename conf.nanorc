@@ -1,11 +1,36 @@
-## Here is an example for nanorc files.
-##
-syntax "Conf" "\.c[o]?nf$"
-## Possible errors and parameters
-## Strings
-icolor white ""(\\.|[^"])*""
-## Comments
-icolor brightblue "^[[:space:]]*#.*$"
-icolor cyan "^[[:space:]]*##.*$"
-## Trailing spaces
-color ,green "[[:space:]]+$"
+# config file highlighting
+
+syntax "conf" "(\.(conf|config|cfg|cnf|rc|lst|list|defs|ini|desktop|mime|types|preset|cache|seat|service|htaccess)$|(^|/)(\w*crontab|mirrorlist|group|hosts|passwd|rpc|netconfig|shadow|fstab|inittab|inputrc|protocols|sudoers)$|conf.d/|.config/)"
+
+# default text
+color magenta "^.*$"
+# special values
+icolor brightblue "(^|\s|=)(default|true|false|on|off|yes|no)(\s|$)"
+# keys
+icolor brightcyan "^\s*(set\s+)?[A-Z0-9_\/\.\%\@+-]+\s*([:]|\>)"
+# commands
+color red "^\s*set\s+\<"
+# punctuation
+color blue "[.]"
+# numbers
+color red "(^|\s|[[/:|<>(){}=,]|\])[-+]?[0-9](\.?[0-9])*%?($|\>)"
+# keys
+icolor cyan "^\s*(\$if )?([A-Z0-9_\/\.\%\@+-]|\s)+="
+# punctuation
+color brightwhite "(\]|[()<>[{},;:=])"
+color brightwhite "(^|\[|\{|\:)\s*-(\s|$)"
+# section headings
+icolor brightyellow "^\s*(\[([A-Z0-9_\.-]|\s)+\])+\s*$"
+color brightcyan "^\s*((Sub)?Section\s*(=|\>)|End(Sub)?Section\s*$)"
+color brightcyan "^\s*\$(end)?if(\s|$)"
+# URLs
+icolor green "\b(([A-Z]+://|www[.])[A-Z0-9/:#?&$=_\.\-]+)(\b|$| )"
+# XML-like tags
+icolor brightcyan "</?\w+((\s*\w+\s*=)?\s*("[^"]*"|'[^']*'|!?[A-Z0-9_:/]))*(\s*/)?>"
+# strings
+color yellow "\"(\\.|[^"])*\"" "'(\\.|[^'])*'"
+# comments
+color brightred "#.*$"
+color brightred "^\s*##.*$"
+color brightred "^;.*$"
+color brightred start="<!--" end="-->"

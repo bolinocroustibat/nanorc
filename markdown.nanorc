@@ -1,51 +1,38 @@
-syntax "Markdown" "\.(md|mkd|mkdn|markdown)$"
+syntax "markdown" "\.md$" "\.markdown$"
 
-# Tables (Github extension)
-color cyan ".*[ :]\|[ :].*"
+## Quotations
+color cyan "^>.*"
 
-# quotes
-color brightblack  start="^>" end="^$"
-color brightblack  "^>.*"
+## Emphasis
+color green "_[^_]*_"
+color green "\*[^\*]*\*"
 
-# Emphasis
-color green "(^|[[:space:]])(_[^ ][^_]*_|\*[^ ][^*]*\*)"
+## Strong emphasis
+color brightgreen "\*\*[^\*]*\*\*"
+color brightgreen "__[\_]*__"
 
-# Strong emphasis
-color brightgreen "(^|[[:space:]])(__[^ ][^_]*__|\*\*[^ ][^*]*\*\*)"
+## Underline headers
+color brightblue "^====(=*)"
+color brightblue "^----(-*)"
 
-# strike-through
-color red "(^|[[:space:]])~~[^ ][^~]*~~"
+## Hash headers
+color brightblue "^#.*"
 
-# horizontal rules
-color brightmagenta "^(---+|===+|___+|\*\*\*+)\s*$"
+## Linkified URLs (and inline html tags)
+color brightmagenta start="<" end=">"
 
-# headlines
-color brightmagenta  "^#{1,6}.*"
+## Links
+color brightmagenta "\[.*\](\([^\)]*\))?"
 
-# lists
-color blue   "^[[:space:]]*[\*+-] |^[[:space:]]*[0-9]+\. "
+## Link id's:
+color brightmagenta "^\[.*\]:( )+.*"
 
-# leading whitespace
-color black    "^[[:space:]]+"
+## Code spans
+color brightyellow "`[^`]*`"
 
-# misc
-color magenta   "\(([CcRr]|[Tt][Mm])\)" "\.{3}" "(^|[[:space:]])\-\-($|[[:space:]])"
+## Links and inline images
+color brightmagenta start="!\[" end="\]"
+color brightmagenta start="\[" end="\]"
 
-# links
-color brightblue "\[[^]]+\]"
-color brightblue "\[([^][]|\[[^]]*\])*\]\([^)]+\)"
-
-# images
-color magenta "!\[[^][]*\](\([^)]+\)|\[[^]]+\])"
-
-# urls
-color brightyellow "https?://[^ )>]+"
-
-# code
-color yellow   "`[^`]*`|^ {4}[^-+*].*"
-# code blocks
-color yellow start="^```[^$]" end="^```$"
-color yellow "^```$"
-
-## Trailing spaces
-color ,green "[[:space:]]+$"
+## Lists
+color yellow "^( )*(\*|\+|\-|[0-9]+\.) "
